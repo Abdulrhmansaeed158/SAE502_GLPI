@@ -1,0 +1,22 @@
+# Réseau Docker
+docker_network_name: infra_GLPI
+docker_network_subnet: 192.168.70.0/24
+docker_network_gateway: 192.168.70.254
+
+# Images et versions
+base_image: "debian:12"
+php_version: "8.2"
+mariadb_version: "10.11"
+glpi_version: "10.0.10"
+
+# GLPI / base de données
+glpi_db_name: glpi
+glpi_db_user: glpi_user
+# le mot de passe sera dans le Vault : vault_db_password
+
+# Ports publiés sur la VM
+published_http_port: 80
+published_https_port: 443
+
+# Sauvegarde
+backup_retention_days: 7
