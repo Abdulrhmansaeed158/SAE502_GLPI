@@ -1,0 +1,10 @@
+FROM debian:12
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      python3 python3-venv python3-pip openssh-client rsync git ca-certificates curl \
+    && rm -rf /var/lib/apt/lists/*
+RUN python3 -m venv /opt/ansible && /opt/ansible/bin/pip install --no-cache-dir ansible docker
+ENV PATH="/opt/ansible/bin:$PATH"
+RUN ansible-galaxy collection install community.docker community.general ansible.posix
+COPY entrypoint-manager.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

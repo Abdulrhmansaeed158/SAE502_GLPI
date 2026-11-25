@@ -1,0 +1,8 @@
+FROM debian:12
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      openssh-server python3 ca-certificates rsync \
+    && rm -rf /var/lib/apt/lists/* && mkdir -p /run/sshd
+COPY entrypoint-node.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+EXPOSE 22
+ENTRYPOINT ["/entrypoint.sh"]
